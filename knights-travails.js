@@ -30,7 +30,7 @@ const Gameboard = (function createGameBoard() {
   };
 })();
 
-const Graph = function creatDirectedGraph() {
+const Graph = function creatGraph() {
   const adjacencyList = {};
 
   const addVertex = function addVertexToGraph(vertex) {
@@ -39,6 +39,7 @@ const Graph = function creatDirectedGraph() {
 
   const addEdge = function addEdgeToGraph(startingVertex, endingVertex) {
     adjacencyList[startingVertex].push(endingVertex);
+    adjacencyList[endingVertex].push(startingVertex);
   };
 
   return {
@@ -47,4 +48,14 @@ const Graph = function creatDirectedGraph() {
   };
 };
 
-console.log(Gameboard.board);
+const KnightsGraph = (function creatKnightsPossibleMovesGraph() {
+  const graph = Graph();
+
+  Gameboard.board.forEach((subArray) => {
+    subArray.forEach((cell) => {
+      graph.addVertex(cell.coordinates);
+    });
+  });
+
+  return graph;
+})();
