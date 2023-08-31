@@ -42,9 +42,14 @@ const Graph = function creatGraph() {
     adjacencyList[endingVertex].push(startingVertex);
   };
 
+  const print = () => {
+    console.log(adjacencyList);
+  };
+
   return {
     addVertex,
     addEdge,
+    print,
   };
 };
 
