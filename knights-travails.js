@@ -38,6 +38,10 @@ const Graph = function creatGraph() {
   };
 
   const addEdge = function addEdgeToGraph(startingVertex, endingVertex) {
+    if (!adjacencyList[startingVertex] || !adjacencyList[endingVertex]) {
+      return;
+    }
+
     adjacencyList[startingVertex].push(endingVertex);
     adjacencyList[endingVertex].push(startingVertex);
   };
@@ -58,9 +62,31 @@ const KnightsGraph = (function creatKnightsPossibleMovesGraph() {
 
   Gameboard.board.forEach((subArray) => {
     subArray.forEach((cell) => {
-      graph.addVertex(cell.coordinates);
+      const currentCellRow = cell.coordinates[0];
+      const currentCellColumn = cell.coordinates[1];
+
+      graph.addVertex([currentCellRow, currentCellColumn]);
+
+      graph.addEdge(
+        [currentCellRow, currentCellColumn],
+        [currentCellRow - 1, currentCellColumn - 2]
+      );
+      graph.addEdge(
+        [currentCellRow, currentCellColumn],
+        [currentCellRow - 1, currentCellColumn + 2]
+      );
+      graph.addEdge(
+        [currentCellRow, currentCellColumn],
+        [currentCellRow - 2, currentCellColumn + 1]
+      );
+      graph.addEdge(
+        [currentCellRow, currentCellColumn],
+        [currentCellRow - 2, currentCellColumn - 1]
+      );
     });
   });
 
   return graph;
 })();
+
+KnightsGraph.print();
