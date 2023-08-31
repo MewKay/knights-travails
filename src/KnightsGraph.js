@@ -1,8 +1,7 @@
 import Graph from "./Graph";
 import Gameboard from "./Gameboard";
-import { getDefaultCompilerOptions } from "typescript";
 
-const KnightsGraph = (function creatKnightsPossibleMovesGraph() {
+const KnightsGraph = (function createKnightsPossibleMovesGraph() {
   const graph = Graph();
 
   Gameboard.board.forEach((subArray) => {

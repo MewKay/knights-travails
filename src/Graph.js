@@ -14,6 +14,43 @@ const Graph = function creatGraph() {
     adjacencyList[endingVertex].push(startingVertex);
   };
 
+  const shortPathbfs = function traverseTreeBreadthFirstToFindshortestPath(
+    startingVertex,
+    lastVertex
+  ) {
+    let queue = [startingVertex];
+    const parent = { startingVertex: null };
+    const marqued = {};
+
+    while (queue.length > 0) {
+      let currentVertex = queue.shift();
+
+      if (currentVertex === lastVertex) {
+        break;
+      }
+
+      adjacencyList[currentVertex].forEach((adjacentVertex) => {
+        if (!marqued[adjacentVertex]) {
+          queue.push(adjacentVertex);
+          parent[adjacentVertex] = currentVertex;
+        }
+      });
+
+      marqued[currentVertex] = true;
+    }
+
+    let shortestPath = [];
+    let currentVertexInPath = lastVertex;
+
+    while (currentVertexInPath !== startingVertex) {
+      shortestPath.unshift(currentVertexInPath);
+      currentVertexInPath = parent[currentVertexInPath];
+    }
+
+    shortestPath.unshift(startingVertex);
+    return shortestPath;
+  };
+
   const print = () => {
     console.log(adjacencyList);
   };
@@ -21,6 +58,7 @@ const Graph = function creatGraph() {
   return {
     addVertex,
     addEdge,
+    shortPathbfs,
     print,
   };
 };
