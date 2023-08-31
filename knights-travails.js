@@ -30,4 +30,20 @@ const Gameboard = (function createGameBoard() {
   };
 })();
 
+const Graph = function creatDirectedGraph() {
+  const adjacencyList = {};
+
+  const addVertex = function addVertexToGraph(vertex) {
+    adjacencyList[vertex] = adjacencyList[vertex] || [];
+  };
+
+  const addEdge = function addEdgeToGraph(startingVertex, endingVertex) {
+    adjacencyList[startingVertex].push(endingVertex);
+  };
+
+  return {
+    addVertex,
+  };
+};
+
 console.log(Gameboard.board);
