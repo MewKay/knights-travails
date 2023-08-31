@@ -43,6 +43,7 @@ const Graph = function creatDirectedGraph() {
 
   return {
     addVertex,
+    addEdge,
   };
 };
 
