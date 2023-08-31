@@ -18,6 +18,14 @@ const Graph = function creatGraph() {
     startingVertex,
     lastVertex
   ) {
+    if (!isVertexInside(startingVertex) || !isVertexInside(lastVertex)) {
+      throw new Error(
+        `[${
+          !isVertexInside(startingVertex) ? startingVertex : lastVertex
+        }] is invalid.`
+      );
+    }
+
     let queue = [startingVertex];
     const parent = { startingVertex: null };
     const marqued = {};
@@ -51,6 +59,10 @@ const Graph = function creatGraph() {
     return shortestPath;
   };
 
+  const isVertexInside = function checkIfVertexExistsInsideTheGraph(vertex) {
+    return adjacencyList[vertex] !== undefined;
+  };
+
   const print = () => {
     console.log(adjacencyList);
   };
@@ -59,6 +71,7 @@ const Graph = function creatGraph() {
     addVertex,
     addEdge,
     shortPathbfs,
+    isVertexInside,
     print,
   };
 };
